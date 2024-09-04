@@ -15,11 +15,19 @@ set(source "src")
 set(main "${source}/main")
 set(maindev "${main}/sources")
 set(kgo "kgo")
+set(gui "gui")
+set (renderers "renderers")
 
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 target_sources(${PROJECT_NAME}
     PRIVATE ${maindev}/${kgo}/KGoApplication.cpp
+    PRIVATE ${maindev}/${gui}/Board.hpp
+    PRIVATE ${maindev}/${gui}/Board.cpp
+    PRIVATE ${maindev}/${gui}/MainWindow.hpp
+    PRIVATE ${maindev}/${gui}/MainWindow.cpp
+    PRIVATE ${maindev}/${renderers}/IRenderer.hpp
+    PRIVATE ${maindev}/${renderers}/NullRenderer.hpp
 )
 
 target_include_directories(${PROJECT_NAME}
