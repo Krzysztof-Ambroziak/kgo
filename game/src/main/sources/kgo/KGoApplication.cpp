@@ -1,14 +1,12 @@
 #include <QApplication>
 
-#include "sources/gui/Board.hpp"
-#include "sources/gui/MainWindow.hpp"
-
+#include "sources/services/GuiService.hpp"
 
 int main(int argc, char* argv[]) {
     QApplication app(argc, argv);
     
-    MainWindow window(new Board);
-    window.show();
+    GuiService guiService;
+    guiService.init();
     
     return QApplication::exec();
 }

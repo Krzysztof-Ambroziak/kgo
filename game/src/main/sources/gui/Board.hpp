@@ -6,6 +6,8 @@
 class IRenderer;
 
 class Board : public QWidget {
+    Q_OBJECT
+
 public:
     explicit Board(QWidget* parent = nullptr);
     
@@ -13,6 +15,11 @@ public:
 
 protected:
     void paintEvent(QPaintEvent* event) override;
+    
+    void resizeEvent(QResizeEvent* event) override;
+
+signals:
+    void sizeChanged(int dim);
 
 private:
     IRenderer* m_renderer = nullptr;

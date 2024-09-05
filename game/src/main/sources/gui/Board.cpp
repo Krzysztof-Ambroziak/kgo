@@ -2,6 +2,7 @@
 #include "sources/renderers/NullRenderer.hpp"
 
 #include <QPainter>
+#include <QResizeEvent>
 
 Board::Board(QWidget* const parent) : QWidget{parent},
                                       m_renderer(&NullRenderer::instance()) {
@@ -20,4 +21,9 @@ void Board::paintEvent(QPaintEvent* event) {
     painter.begin(this);
     m_renderer->render(painter);
     painter.end();
+}
+
+
+void Board::resizeEvent(QResizeEvent* event) {
+    emit sizeChanged(event->size().width());
 }
