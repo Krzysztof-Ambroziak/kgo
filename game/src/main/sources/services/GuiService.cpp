@@ -4,6 +4,7 @@
 #include "sources/models/BoardModel.hpp"
 #include "sources/renderers/BoardRenderer.hpp"
 
+#include <QImage>
 #include <QPainter>
 
 GuiService::GuiService() : m_board{new Board},
@@ -20,7 +21,7 @@ void GuiService::init() {
     m_mainWindow.show();
 }
 
-void GuiService::setBoardSize(int dim) {
+void GuiService::repaintGrid(int dim) {
     constexpr int boardSize = 19;  // TODO hardcoded
     
     const int m = dim / boardSize / 3;
@@ -31,8 +32,8 @@ void GuiService::setBoardSize(int dim) {
     QPainter painter(&img);
     
     // from center point
+    const int low = centerLine - (boardSize / 2) * cellSize;
     const int hig = centerLine + (boardSize / 2) * cellSize;
-    const int low  = centerLine - (boardSize / 2) * cellSize;
     painter.drawRect(low, low, (boardSize-1) * cellSize, (boardSize-1) * cellSize);
     painter.drawRect(low-1, low-1, (boardSize-1) * cellSize+2, (boardSize-1) * cellSize+2);
     for (int i = 0; i < boardSize / 2; i++) {
@@ -44,4 +45,37 @@ void GuiService::setBoardSize(int dim) {
     }
     
     m_boardModel->setGrid(QPixmap::fromImage(img).copy());
+}
+
+void GuiService::repaintStarPoints(int dim) {
+    static QPainter painter;
+    painter.setBrush(Qt::SolidPattern);
+    
+    constexpr int boardSize = 19;  // TODO hardcoded
+    const int m = dim / boardSize / 3;
+    const int cellSize = (dim - 2 * m) / boardSize;
+    
+    const int centerLine = dim / 2;
+    
+    QImage img{m_boardModel->grid().toImage()};
+    painter.begin(&img);
+    painter.drawEllipse(centerLine - 6*cellSize - 2, centerLine - 6*cellSize - 2, 4, 4);
+    painter.drawEllipse(centerLine - 2             , centerLine - 6*cellSize - 2, 4, 4);
+    painter.drawEllipse(centerLine + 6*cellSize - 2, centerLine - 6*cellSize - 2, 4, 4);
+    
+    painter.drawEllipse(centerLine - 6*cellSize - 2, centerLine-2, 4, 4);
+    painter.drawEllipse(centerLine - 2             , centerLine-2, 4, 4);
+    painter.drawEllipse(centerLine + 6*cellSize - 2, centerLine-2, 4, 4);
+    
+    painter.drawEllipse(centerLine - 6*cellSize - 2, centerLine + 6*cellSize - 2, 4, 4);
+    painter.drawEllipse(centerLine - 2             , centerLine + 6*cellSize - 2, 4, 4);
+    painter.drawEllipse(centerLine + 6*cellSize - 2, centerLine + 6*cellSize - 2, 4, 4);
+    painter.end();
+    
+    m_boardModel->setGrid(QPixmap::fromImage(img));
+}
+
+void GuiService::setBoardSize(int dim) {
+    repaintGrid(dim);
+    repaintStarPoints(dim);
 }

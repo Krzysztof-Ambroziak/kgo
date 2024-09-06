@@ -13,6 +13,10 @@ public:
     
     void init();
 
+private:
+    void repaintGrid(int dim);
+    void repaintStarPoints(int dim);
+
 private slots:
     void setBoardSize(int dim);
 
