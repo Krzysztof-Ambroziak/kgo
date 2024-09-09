@@ -5,24 +5,24 @@
 
 class NullRenderer : public IRenderer {
 public:
-    static NullRenderer& instance();
+    static NullRenderer& instance() {
+        static NullRenderer renderer;
+        return renderer;
+    }
 
 public:
     NullRenderer(const NullRenderer& renderer) = delete;
     
-    void render(QPainter& painter) override;
+    void render(QPainter& painter) override {
+        // Do nothing
+    }
+    
+    const GoPoint& boardPoint(const QPoint& point) const override {
+        return GoPoint::NULL_POINT;
+    }
 
 private:
     NullRenderer() = default;
 };
-
-inline NullRenderer& NullRenderer::instance() {
-    static NullRenderer renderer;
-    return renderer;
-}
-
-inline void NullRenderer::render(QPainter& painter) {
-    // Do nothing
-}
 
 #endif  // NULLRENDERER_HPP

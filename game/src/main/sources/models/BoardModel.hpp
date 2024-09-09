@@ -1,19 +1,21 @@
 #ifndef BOARDMODEL_HPP
 #define BOARDMODEL_HPP
 
-#include <QPixmap>
+#include "IBoardModel.hpp"
 
-class BoardModel {
+class BoardModel : public IBoardModel {
 public:
-    const QPixmap& background() const;
-    void setBackground(const QPixmap& background);
+    BoardModel();
     
-    const QPixmap& grid() const;
-    void setGrid(const QPixmap& grid);
+    Size size() const override;
+    void setSize(Size size);
+    
+    bool isCoordinateLabelsVisible() const override;
+    void setCoordinateLabelsVisible(bool coordinateLabelsVisible);
 
 private:
-    QPixmap m_background;
-    QPixmap m_grid;
+    Size m_size;
+    bool m_coordinateLabelsVisible;
 };
 
 #endif  // BOARDMODEL_HPP

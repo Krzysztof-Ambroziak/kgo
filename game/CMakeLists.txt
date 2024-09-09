@@ -19,6 +19,7 @@ set(maindev "${main}/sources")
 set(mainres "${main}/resources")
 set(kgo "kgo")
 set(models "models")
+set(go "go")
 set(gui "gui")
 set(renderers "renderers")
 set(services "services")
@@ -38,6 +39,7 @@ target_sources(${PROJECT_NAME}
     PRIVATE ${maindev}/${gui}/Board.cpp
     PRIVATE ${maindev}/${gui}/MainWindow.hpp
     PRIVATE ${maindev}/${gui}/MainWindow.cpp
+    PRIVATE ${maindev}/${models}/IBoardModel.hpp
     PRIVATE ${maindev}/${models}/BoardModel.hpp
     PRIVATE ${maindev}/${models}/BoardModel.cpp
     PRIVATE ${maindev}/${renderers}/IRenderer.hpp
@@ -46,6 +48,11 @@ target_sources(${PROJECT_NAME}
     PRIVATE ${maindev}/${renderers}/BoardRenderer.cpp
     PRIVATE ${maindev}/${services}/GuiService.hpp
     PRIVATE ${maindev}/${services}/GuiService.cpp
+    PRIVATE ${maindev}/${go}/BoardConstants.hpp
+    PRIVATE ${maindev}/${go}/BoardConstants.cpp
+    PRIVATE ${maindev}/${go}/GoPoint.hpp
+    PRIVATE ${maindev}/${go}/GoPoint.cpp
+    PRIVATE ${maindev}/${go}/Size.hpp
     PRIVATE ${RESOURCES}
 )
 

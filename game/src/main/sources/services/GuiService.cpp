@@ -15,64 +15,36 @@ GuiService::GuiService() : m_board{new Board},
 }
 
 void GuiService::init() {
-    m_boardModel->setBackground(QPixmap(":/bg/wood1.jpg"));
     m_board->setRenderer(m_boardRenderer);
     
     m_mainWindow.show();
 }
 
 void GuiService::repaintGrid(int dim) {
-    constexpr int boardSize = 19;  // TODO hardcoded
+    const int size = static_cast<int>(m_boardModel->size());
     
-    const int m = dim / boardSize / 3;
-    const int cellSize = (dim - 2 * m) / boardSize;
+    const int m = dim / static_cast<int>(m_boardModel->size()) / 3;
+    const int cellSize = (dim - 2 * m) / size;
     const int centerLine = dim / 2;
     
     QImage img({dim, dim}, QImage::Format::Format_ARGB32);
     QPainter painter(&img);
     
     // from center point
-    const int low = centerLine - (boardSize / 2) * cellSize;
-    const int hig = centerLine + (boardSize / 2) * cellSize;
-    painter.drawRect(low, low, (boardSize-1) * cellSize, (boardSize-1) * cellSize);
-    painter.drawRect(low-1, low-1, (boardSize-1) * cellSize+2, (boardSize-1) * cellSize+2);
-    for (int i = 0; i < boardSize / 2; i++) {
+    const int low = centerLine - (size / 2) * cellSize;
+    const int hig = centerLine + (size / 2) * cellSize;
+    painter.drawRect(low, low, (size-1) * cellSize, (size-1) * cellSize);
+    painter.drawRect(low-1, low-1, (size-1) * cellSize+2, (size-1) * cellSize+2);
+    for (int i = 0; i < size / 2; i++) {
         painter.drawLine(low, centerLine - i*cellSize, hig, centerLine - i*cellSize);
         painter.drawLine(centerLine - i*cellSize, low, centerLine - i*cellSize, hig);
         
         painter.drawLine(low, centerLine + i*cellSize, hig, centerLine + i*cellSize);
         painter.drawLine(centerLine + i*cellSize, low, centerLine + i*cellSize, hig);
     }
-    
-    m_boardModel->setGrid(QPixmap::fromImage(img).copy());
 }
 
 void GuiService::repaintStarPoints(int dim) {
-    static QPainter painter;
-    painter.setBrush(Qt::SolidPattern);
-    
-    constexpr int boardSize = 19;  // TODO hardcoded
-    const int m = dim / boardSize / 3;
-    const int cellSize = (dim - 2 * m) / boardSize;
-    
-    const int centerLine = dim / 2;
-    
-    QImage img{m_boardModel->grid().toImage()};
-    painter.begin(&img);
-    painter.drawEllipse(centerLine - 6*cellSize - 2, centerLine - 6*cellSize - 2, 4, 4);
-    painter.drawEllipse(centerLine - 2             , centerLine - 6*cellSize - 2, 4, 4);
-    painter.drawEllipse(centerLine + 6*cellSize - 2, centerLine - 6*cellSize - 2, 4, 4);
-    
-    painter.drawEllipse(centerLine - 6*cellSize - 2, centerLine-2, 4, 4);
-    painter.drawEllipse(centerLine - 2             , centerLine-2, 4, 4);
-    painter.drawEllipse(centerLine + 6*cellSize - 2, centerLine-2, 4, 4);
-    
-    painter.drawEllipse(centerLine - 6*cellSize - 2, centerLine + 6*cellSize - 2, 4, 4);
-    painter.drawEllipse(centerLine - 2             , centerLine + 6*cellSize - 2, 4, 4);
-    painter.drawEllipse(centerLine + 6*cellSize - 2, centerLine + 6*cellSize - 2, 4, 4);
-    painter.end();
-    
-    m_boardModel->setGrid(QPixmap::fromImage(img));
 }
 
 void GuiService::setBoardSize(int dim) {

@@ -1,17 +1,21 @@
 #include "BoardModel.hpp"
+#include "sources/go/Size.hpp"
 
-const QPixmap& BoardModel::background() const {
-    return m_background;
+BoardModel::BoardModel() : m_size{Size::B_19},
+                           m_coordinateLabelsVisible(true) {}
+
+Size BoardModel::size() const {
+    return m_size;
 }
 
-void BoardModel::setBackground(const QPixmap& background) {
-    m_background = background;
+void BoardModel::setSize(Size size) {
+    m_size = size;
 }
 
-const QPixmap& BoardModel::grid() const {
-    return m_grid;
+bool BoardModel::isCoordinateLabelsVisible() const {
+    return m_coordinateLabelsVisible;
 }
 
-void BoardModel::setGrid(const QPixmap& grid) {
-    m_grid = grid;
+void BoardModel::setCoordinateLabelsVisible(bool visible) {
+    m_coordinateLabelsVisible = visible;
 }

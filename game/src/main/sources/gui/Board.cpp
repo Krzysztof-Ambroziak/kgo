@@ -6,16 +6,16 @@
 
 Board::Board(QWidget* const parent) : QWidget{parent},
                                       m_renderer(&NullRenderer::instance()) {
-    QPalette palette(Qt::darkGray);
+    QPalette palette(QColor(239, 187, 134));
     setAutoFillBackground(true);
     setPalette(palette);
 }
 
-void Board::setRenderer(IRenderer* renderer) {
+void Board::setRenderer(IRenderer* const renderer) {
     m_renderer = renderer;
 }
 
-void Board::paintEvent(QPaintEvent* event) {
+void Board::paintEvent(QPaintEvent* const event) {
     static QPainter painter;
     
     painter.begin(this);
@@ -24,6 +24,12 @@ void Board::paintEvent(QPaintEvent* event) {
 }
 
 
-void Board::resizeEvent(QResizeEvent* event) {
+void Board::resizeEvent(QResizeEvent* const event) {
     emit sizeChanged(event->size().width());
 }
+
+void Board::mousePressEvent(QMouseEvent* const event) {
+    m_renderer->boardPoint(event->pos());
+}
+
+
