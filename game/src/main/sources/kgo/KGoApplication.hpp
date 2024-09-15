@@ -1,7 +1,7 @@
 #ifndef KGOAPPLICATION_HPP
 #define KGOAPPLICATION_HPP
 
-#include "sources/gui/Board.hpp"
+#include "sources/gui/GuiBoard.hpp"
 
 class GuiService;
 

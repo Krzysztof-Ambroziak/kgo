@@ -1,5 +1,5 @@
 #include "GuiService.hpp"
-#include "sources/gui/Board.hpp"
+#include "sources/gui/GuiBoard.hpp"
 #include "sources/gui/MainWindow.hpp"
 #include "sources/models/BoardModel.hpp"
 #include "sources/renderers/BoardRenderer.hpp"

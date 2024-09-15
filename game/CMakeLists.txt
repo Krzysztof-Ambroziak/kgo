@@ -36,8 +36,8 @@ target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 target_sources(${PROJECT_NAME}
     PRIVATE ${maindev}/${kgo}/KGoApplication.hpp
     PRIVATE ${maindev}/${kgo}/KGoApplication.cpp
-    PRIVATE ${maindev}/${gui}/Board.hpp
-    PRIVATE ${maindev}/${gui}/Board.cpp
+    PRIVATE ${maindev}/${gui}/GuiBoard.hpp
+    PRIVATE ${maindev}/${gui}/GuiBoard.cpp
     PRIVATE ${maindev}/${gui}/MainWindow.hpp
     PRIVATE ${maindev}/${gui}/MainWindow.cpp
     PRIVATE ${maindev}/${models}/IBoardModel.hpp

@@ -5,7 +5,7 @@
 #include <QResizeEvent>
 
 MainWindow::MainWindow(QWidget* const boardPanel, QWidget* const parent) : QMainWindow{parent} {
-    setupUI(boardPanel);
+                                                                           setupUI(boardPanel);
 }
 
 void MainWindow::setupUI(QWidget* const boardPanel) {

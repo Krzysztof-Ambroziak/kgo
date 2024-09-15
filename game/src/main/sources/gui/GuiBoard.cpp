@@ -1,4 +1,4 @@
-#include "Board.hpp"
+#include "GuiBoard.hpp"
 #include "sources/renderers/NullRenderer.hpp"
 
 #include <QPainter>
