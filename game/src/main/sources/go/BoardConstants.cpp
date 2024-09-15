@@ -57,3 +57,11 @@ const BoardConstants& BoardConstants::instance(int boardSize) {
 
 BoardConstants::BoardConstants(int count, const GoPoint** goPoints) : m_count(count),
     m_starPoints{goPoints} {}
+
+int BoardConstants::count() const {
+    return m_count;
+}
+
+const GoPoint** BoardConstants::points() const {
+    return m_starPoints;
+}

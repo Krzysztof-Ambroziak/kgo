@@ -34,6 +34,7 @@ set_property(TARGET ${PROJECT_NAME}
 target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 
 target_sources(${PROJECT_NAME}
+    PRIVATE ${maindev}/${kgo}/KGoApplication.hpp
     PRIVATE ${maindev}/${kgo}/KGoApplication.cpp
     PRIVATE ${maindev}/${gui}/Board.hpp
     PRIVATE ${maindev}/${gui}/Board.cpp

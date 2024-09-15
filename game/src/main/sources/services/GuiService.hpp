@@ -7,9 +7,11 @@ class Board;
 class BoardModel;
 class BoardRenderer;
 
-class GuiService : public QObject{
+class GuiService : public QObject {
 public:
     GuiService();
+    
+    Board* getBoard() const;
     
     void init();
 

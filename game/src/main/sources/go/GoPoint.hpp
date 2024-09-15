@@ -6,19 +6,22 @@ struct GoPoint {
     
     GoPoint(const GoPoint& obj) = delete;
     
+    int col() const;
+    int row() const;
+    
     bool operator==(const GoPoint& obj) const;
 
 private:
     GoPoint(int col, int row) : m_col(col), m_row(row) {}
 
 public:
-    static constexpr int s_DEFAULT_SIZE = 19;
-    static constexpr int s_MAX_SIZE = 25;
+    static constexpr int DEFAULT_SIZE = 19;
+    static constexpr int MAX_SIZE = 25;
     
     static const GoPoint NULL_POINT;
 
 private:
-    static const GoPoint s_POINTS[][s_MAX_SIZE];
+    static const GoPoint s_POINTS[][MAX_SIZE];
     
     const int m_col;
     const int m_row;

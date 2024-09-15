@@ -8,6 +8,9 @@ public:
     static const BoardConstants& instance(int boardSize);
     
     BoardConstants(const BoardConstants& obj) = delete;
+    
+    int count() const;
+    const GoPoint** points() const;
 
 private:
     BoardConstants(int count, const GoPoint** goPoints);

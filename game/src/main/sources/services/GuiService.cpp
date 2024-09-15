@@ -14,6 +14,10 @@ GuiService::GuiService() : m_board{new Board},
     QObject::connect(m_board, &Board::sizeChanged, this, &GuiService::setBoardSize);
 }
 
+Board* GuiService::getBoard() const {
+    return m_board;
+}
+
 void GuiService::init() {
     m_board->setRenderer(m_boardRenderer);
     

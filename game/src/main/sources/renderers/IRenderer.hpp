@@ -1,8 +1,7 @@
 #ifndef IRENDERER_HPP
 #define IRENDERER_HPP
 
-#include "sources/go/GoPoint.hpp"
-
+struct GoPoint;
 class QPainter;
 class QPoint;
 

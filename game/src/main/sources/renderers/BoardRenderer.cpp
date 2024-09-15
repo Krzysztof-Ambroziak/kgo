@@ -1,9 +1,10 @@
 #include "BoardRenderer.hpp"
+#include "sources/go/BoardConstants.hpp"
+#include "sources/go/GoPoint.hpp"
+#include "sources/models/IBoardModel.hpp"
 
-#include <QDebug>
 #include <QPainter>
 
-#include "sources/models/IBoardModel.hpp"
 
 BoardRenderer::BoardRenderer(const IBoardModel* const boardModel) : m_background{":/bg/wood1.jpg"},
                                                                     m_boardModel{boardModel} {}
@@ -39,11 +40,26 @@ void BoardRenderer::drawGrid(QPainter& painter) {
         
         painter.drawLine(top, bottom);
     }
+    
+    const BoardConstants& constants = BoardConstants::instance(size);
+    const GoPoint** const points = constants.points();
+    painter.setBrush(Qt::BrushStyle::SolidPattern);
+    painter.setRenderHints(QPainter::Antialiasing);
+    for(int i = 0; i < constants.count(); ++i) {
+        const GoPoint& p = *points[i];
+        const QPoint& c = center(p.col(), p.row());
+        painter.drawEllipse(c.x()-2, c.y()-2, 5, 5);
+    }
+    painter.setRenderHints(QPainter::Antialiasing, false);
 }
 
-
 const GoPoint& BoardRenderer::boardPoint(const QPoint& point) const {
-    return GoPoint::NULL_POINT;
+    const int size = static_cast<int>(m_boardModel->size());
+    const int col = (point.x() - m_fieldOffset) / m_fieldSize;
+    const int row = size - ((point.x() - m_fieldOffset) / m_fieldSize) - 1;
+    
+    return (col >= 0 && col < size && row >= 0 && row < size) ? GoPoint::point(col, row)
+                                                              : GoPoint::NULL_POINT;
 }
 
 QPoint BoardRenderer::center(int x, int y) const {

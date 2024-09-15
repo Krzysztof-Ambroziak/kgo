@@ -11,6 +11,10 @@ Board::Board(QWidget* const parent) : QWidget{parent},
     setPalette(palette);
 }
 
+void Board::setListener(Listener* const listener) {
+    m_listener = listener;
+}
+
 void Board::setRenderer(IRenderer* const renderer) {
     m_renderer = renderer;
 }
@@ -29,7 +33,10 @@ void Board::resizeEvent(QResizeEvent* const event) {
 }
 
 void Board::mousePressEvent(QMouseEvent* const event) {
-    m_renderer->boardPoint(event->pos());
+    if(m_listener != nullptr) {
+        const auto& goPoint = m_renderer->boardPoint(event->pos());
+        m_listener->fieldClicked(goPoint);
+    }
 }
 
 

@@ -3,13 +3,22 @@
 
 #include <QWidget>
 
+struct GoPoint;
 class IRenderer;
 
 class Board : public QWidget {
     Q_OBJECT
 
 public:
+    class Listener {
+    public:
+        virtual void fieldClicked(const GoPoint& point) = 0;
+    };
+
+public:
     explicit Board(QWidget* parent = nullptr);
+    
+    void setListener(Listener* listener);
     
     void setRenderer(IRenderer* renderer);
 
@@ -24,6 +33,7 @@ signals:
     void sizeChanged(int dim);
 
 private:
+    Listener* m_listener = nullptr;
     IRenderer* m_renderer = nullptr;
 };
 

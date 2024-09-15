@@ -2,6 +2,7 @@
 #define NULLRENDERER_HPP
 
 #include "IRenderer.hpp"
+#include "sources/go/GoPoint.hpp"
 
 class NullRenderer : public IRenderer {
 public:
